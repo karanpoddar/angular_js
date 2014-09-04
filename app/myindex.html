@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app>
+
+<head>
+	<script src="angular.js"></script>
+	<script src="app.js"></script>
+	<style>
+    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  			display: none !important;
+		}
+
+		.highlight {
+			color :red;
+		}
+</style>
+</head>
+
+<body class="ng-cloak">
+	<div class="ng-cloak" ng-controller="greetingController">
+		<div ng-show="showGreeting">
+			<h1>{{greeting.timeOfDay}} {{greeting.companyName}}!</h1>
+		</div>
+		<div>
+			<input type="text" ng-model="greeting.timeOfDay"/>
+		</div>
+
+		<div>
+			<input type="checkbox" ng-model="showGreeting"/>Show Greeting
+		</div>
+
+	</div>
+	<hr/>
+	<div ng-controller="hotelsController">
+        <div ng-repeat="hotel in hotels">
+                <div ng-class="{highlight : hotel.price > 20000}">{{hotel.name}} {{hotel.price}} ({{hotel.location}})
+                    <button ng-click="deleteHotel(hotel)">Delete</button>
+                </div>
+        </div>
+        <input type="text" ng-model="newHotel.name"/><br/>
+        <input type="text" ng-model="newHotel.price"/><br/>
+        <input type="text" ng-model="newHotel.location"/><br/>
+        <button ng-click="addHotel(newHotel)">Add</button>
+    </div>
+</body>
+
+</html>
