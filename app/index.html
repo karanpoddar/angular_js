@@ -4,6 +4,7 @@
 <head>
 	<script src="angular.js"></script>
 	<script src="app.js"></script>
+	<link rel="stylesheet" type="text/css" href="bootstrap.css">
 	<style>
     [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   			display: none !important;
@@ -15,29 +16,51 @@
 </style>
 </head>
 
-<body class="ng-cloak">
-	<div class="ng-cloak" ng-controller="greetingController">
-		<div ng-show="showGreeting">
-			<h1>{{greeting.timeOfDay}} {{greeting.companyName}}!</h1>
-		</div>
-		<div>
-			<input type="text" ng-model="greeting.timeOfDay"/>
-		</div>
+<body  class="container">
+	<div class="header">
+		<div class="hidden-xs" ng-controller="greetingController">
+			<div ng-show="showGreeting">
+				<h1>{{greeting.timeOfDay}} {{greeting.companyName}}!</h1>
+			</div>
+			<div>
+				<input type="text" ng-model="greeting.timeOfDay"/>
+			</div>
 
-		<div>
-			<input type="checkbox" ng-model="showGreeting"/>Show Greeting
-		</div>
+			<div>
+				<input type="checkbox" ng-model="showGreeting"/>
+				Show Greeting
+			</div>
 
+		</div>
 	</div>
 	<hr/>
-	<div ng-controller="hotelsController">
-	<div>
-	<button ng-click="addHotel()">Add</button>
-	</div>
+	<div class="row" ng-controller="hotelsController">
+		<div class="row hidden-xs">
+			<div class="col-md-3">
+				<input type="text" ng-model="hotel.name"></div>
+			<div class="col-md-3">
+				<input type="text" ng-model="hotel.price"></div>
+			<div class="col-md-3">
+				<input type="text" ng-model="hotel.location"></div>
 
-		<div ng-repeat="hotel in hotels">
-			<div ng-class="{highlight : hotel.price > 20000}">{{hotel.name}} {{hotel.price}} ({{hotel.location}})</div>
+			<div class="col-md-3">
+				<button ng-click="addHotel(hotel)">Add</button>
+			</div>
 
+		</div>
+		<hr/>
+		<div class="row">
+			<div ng-repeat="hotel in hotels" class="row">
+				<img ng-src="http://i.imgur.com/{{hotel.imgUrl}}" class="col-md-2 col-sm-3 col-xs-3 img-thumbnail img-responsive" />
+				<div class="col-md-10 col-sm-9 col-xs-9 ">
+					<div ng-class="{highlight : hotel.price >
+						20000}">
+						<div class="col-md-4 col-xs-3">{{hotel.name}}</div>
+						<div class="col-md-4 col-xs-3">{{hotel.price}}</div>
+						<div class="col-md-4 col-xs-3">{{hotel.location}}</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
