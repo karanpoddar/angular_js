@@ -2,21 +2,44 @@
 <html ng-app>
 
 <head>
-    <script src="angular.js"></script>
-    <script src="app.js"></script>
+	<script src="angular.js"></script>
+	<script src="app.js"></script>
+	<style>
+    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  			display: none !important;
+		}
+
+		.highlight {
+			color :red;
+		}
+</style>
 </head>
 
-<body>
-    <div ng-controller="greetingController">
-        <h1>{{timeOfDay}} Walmart!</h1>
+<body class="ng-cloak">
+	<div class="ng-cloak" ng-controller="greetingController">
+		<div ng-show="showGreeting">
+			<h1>{{greeting.timeOfDay}} {{greeting.companyName}}!</h1>
+		</div>
+		<div>
+			<input type="text" ng-model="greeting.timeOfDay"/>
+		</div>
 
-        <div ng-controller="nestedController">
-			<h1 style="color:red">{{timeOfDay}}</h1>        	
-        </div>
-    </div>
-    <div ng-controller="testController">
-    	<h1 style="color:blue">{{timeOfDay}} Walmart</h1>        	
-    </div>
+		<div>
+			<input type="checkbox" ng-model="showGreeting"/>Show Greeting
+		</div>
+
+	</div>
+	<hr/>
+	<div ng-controller="hotelsController">
+	<div>
+	<button ng-click="addHotel()">Add</button>
+	</div>
+
+		<div ng-repeat="hotel in hotels">
+			<div ng-class="{highlight : hotel.price > 20000}">{{hotel.name}} {{hotel.price}} ({{hotel.location}})</div>
+
+		</div>
+	</div>
 </body>
 
 </html>
