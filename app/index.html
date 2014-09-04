@@ -3,11 +3,20 @@
 
 <head>
     <script src="angular.js"></script>
-    <script src="script.js"></script>
+    <script src="app.js"></script>
 </head>
 
 <body>
-Hello, World!
+    <div ng-controller="greetingController">
+        <h1>{{timeOfDay}} Walmart!</h1>
+
+        <div ng-controller="nestedController">
+			<h1 style="color:red">{{timeOfDay}}</h1>        	
+        </div>
+    </div>
+    <div ng-controller="testController">
+    	<h1 style="color:blue">{{timeOfDay}} Walmart</h1>        	
+    </div>
 </body>
 
 </html>
