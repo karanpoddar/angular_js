@@ -49,15 +49,30 @@
 
 		</div>
 		<hr/>
+		<div class="row hidden-xs">
+			<div class="col-md-3">
+				<input type="text" class="form-control" ng-model="searchText" placeholder="enter search term">
+			</div>
+
+		</div>
+		<hr/>
 		<div class="row">
-			<div ng-repeat="hotel in hotels" class="row">
+			<div ng-repeat="hotel in hotels | filter : searchText | orderBy : 'price' : true" class="row">
 				<img ng-src="http://i.imgur.com/{{hotel.imgUrl}}" class="col-md-2 col-sm-3 col-xs-3 img-thumbnail img-responsive" />
 				<div class="col-md-10 col-sm-9 col-xs-9 ">
-					<div ng-class="{highlight : hotel.price >
-						20000}">
-						<div class="col-md-4 col-xs-3">{{hotel.name}}</div>
-						<div class="col-md-4 col-xs-3">{{hotel.price}}</div>
-						<div class="col-md-4 col-xs-3">{{hotel.location}}</div>
+					<div class="row h3">
+						{{hotel.name | uppercase}}
+					</div>
+					<div class="row">
+						<span ng-show="!showMore">{{hotel.description | limitTo : 100}}</span>
+						<span ng-show="showMore">{{hotel.description}}</span>
+						<span ng-show="hotel.description.length> 100 && !showMore">...</span>
+						<span ng-show="hotel.description.length> 100 && !showMore"><a href="" ng-click="showMore = true">more</a></span>
+					</div>
+					<div class="row">
+						<div class="col-md-4 "><h2><span class="label label-success">{{hotel.price}}</span></h2></div>						
+						<div class="col-md-4">{{hotel.location}}</div>						
+						<div class="col-md-4">{{hotel.area}}</div>						
 					</div>
 				</div>
 			</div>
