@@ -5,7 +5,10 @@ angular.module('discoHotel').controller('listingController',
         $scope.descLimit = uiConfig.descLimit;
 
 
-        var hotels = hotelsProvider.getHotels();
+        hotelsProvider.getHotels(function(hotels){
+
+            $scope.hotels = hotels;
+        });
 
 
         $scope.upVote = function(hotel) {
@@ -16,9 +19,6 @@ angular.module('discoHotel').controller('listingController',
             votingService.downVote(hotel);
         }
 
-        $scope.hotels = hotels;
-
-       
 
         $scope.toFeet = function(input) {
             return input * 10.7639;
