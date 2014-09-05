@@ -12,7 +12,7 @@ angular.module('discoHotel', ['ngRoute'])
         });
       
         $routeProvider.when('/create', {
-            templateUrl: 'partials/create.html'
+            template: '<h1>This is place where we will create a new hotel</h1>'
         });
       
     }

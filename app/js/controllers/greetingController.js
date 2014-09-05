@@ -1,27 +1,13 @@
 
 angular.module('discoHotel').controller('greetingController',
 
-    function($scope) {
-        var time = (new Date()).getHours();
-
-        var tod = 'Good Morning';
-        if (time > 9) {
-            tod = 'Good Late Morning';
-        }
-
-        if (time > 12) {
-            tod = 'Good Afternoon';
-        }
-        //if (  > )
-
-
+    function($scope,greetingService) {
+        
         $scope.greeting = {
-            timeOfDay: tod,
+            timeOfDay: greetingService.getGreeting(),
             companyName: 'Walmart Labs'
         }
-
         $scope.showGreeting = true;
-
 
     }
 );

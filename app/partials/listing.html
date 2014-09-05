@@ -17,7 +17,7 @@
 		</div>
 		<hr/>
 		<div class="row">
-			<div ng-repeat="hotel in hotels | filter : searchText | orderBy : sortBy : true" class="row well">
+			<div ng-repeat="hotel in hotels | filter : searchText | orderBy : orderbyFunction : true" class="row well">
 				<div class="col-md-1">
 					<div>
 						<button ng-click="upVote(hotel)" class="btn btn-sm btn-success">
@@ -59,22 +59,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="col-md-3">
-	<div ng-controller="newHotelController">
-		<div class="row hidden-xs">
-			<div class="">
-				<input type="text" ng-model="hotel.name"></div>
-			<div class="">
-				<input type="text" ng-model="hotel.price"></div>
-			<div class="">
-				<input type="text" ng-model="hotel.location"></div>
-
-			<div class="">
-				<button ng-click="addHotel(hotel)">Add</button>
 			</div>
 		</div>
 	</div>

@@ -23,6 +23,22 @@ angular.module('discoHotel').controller('listingController',
         $scope.toFeet = function(input) {
             return input * 10.7639;
         }
+        
+        $scope.orderbyFunction = function(hotel) {
+            if(!$scope.sortBy) {
+                return hotel.id;
+            }
+            if (!$scope.sortBy.localeCompare("rating")) {
+                if (!hotel.rating) {
+                    return 0;
+                }
+                return hotel.rating;
+            }
+            else if(!$scope.sortBy.localeCompare("price")) {
+                return hotel.price;
+            }
+            return hotel.id;
+        }
 
     });
 
