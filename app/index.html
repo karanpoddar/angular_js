@@ -4,7 +4,7 @@
 <head>
 	<script src="angular.js"></script>
 	<script src="app.js"></script>
-	<link rel="stylesheet" type="text/css" href="bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="components/bootstrap/css/bootstrap.css">
 	<style>
     [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   			display: none !important;
@@ -51,28 +51,51 @@
 		<hr/>
 		<div class="row hidden-xs">
 			<div class="col-md-3">
-				<input type="text" class="form-control" ng-model="searchText" placeholder="enter search term">
+				<input type="text" class="form-control" ng-model="searchText" placeholder="enter search term"></div>
+
+			<div class="col-md-3">
+				<select class="form-control" ng-model="sortBy">
+					<option value="price">Price</option>
+					<option value="rating">Rating</option>
+				</select>
+				
 			</div>
 
 		</div>
 		<hr/>
 		<div class="row">
-			<div ng-repeat="hotel in hotels | filter : searchText | orderBy : 'price' : true" class="row">
-				<img ng-src="http://i.imgur.com/{{hotel.imgUrl}}" class="col-md-2 col-sm-3 col-xs-3 img-thumbnail img-responsive" />
-				<div class="col-md-10 col-sm-9 col-xs-9 ">
-					<div class="row h3">
-						{{hotel.name | uppercase}}
+			<div ng-repeat="hotel in hotels | filter : searchText | orderBy : sortBy : true" class="row well">
+				<div class="col-md-1">
+					<div>
+						<button ng-click="upVote(hotel)" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-chevron-up"></span></button>
 					</div>
-					<div class="row">
-						<span ng-show="!showMore">{{hotel.description | limitTo : 100}}</span>
-						<span ng-show="showMore">{{hotel.description}}</span>
-						<span ng-show="hotel.description.length> 100 && !showMore">...</span>
-						<span ng-show="hotel.description.length> 100 && !showMore"><a href="" ng-click="showMore = true">more</a></span>
+					<div ><h3><span class="label label-default">{{hotel.rating ? hotel.rating : 0}}</span></h3></div>
+					<div>
+						<button ng-click="downVote(hotel)" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-chevron-down"></span></button>
 					</div>
-					<div class="row">
-						<div class="col-md-4 "><h2><span class="label label-success">{{hotel.price}}</span></h2></div>						
-						<div class="col-md-4">{{hotel.location}}</div>						
-						<div class="col-md-4">{{hotel.area}}</div>						
+				</div>
+				<div class="col-md-11">
+					<img ng-src="http://i.imgur.com/{{hotel.imgUrl}}" class="col-md-2 col-sm-3 col-xs-3 img-thumbnail" />
+					<div class="col-md-offset-1 col-md-9 col-sm-9 col-xs-9 padding-left">
+						<div class="row h3">{{hotel.name | uppercase}}</div>
+						<div class="row">
+							<span ng-show="!showMore">{{hotel.description | limitTo : 100}}</span>
+							<span ng-show="showMore">{{hotel.description}}</span>
+							<span ng-show="hotel.description.length>100 && !showMore">...</span>
+							<span ng-show="hotel.description.length>
+								100 && !showMore">
+								<a href="" ng-click="showMore = true">more</a>
+							</span>
+						</div>
+						<div class="row">
+							<div class="col-md-4 ">
+								<h2>
+									<span class="label label-success">{{hotel.price}}</span>
+								</h2>
+							</div>
+							<div class="col-md-4">{{hotel.location}}</div>
+							<div class="col-md-4">{{hotel.area}}</div>
+						</div>
 					</div>
 				</div>
 			</div>

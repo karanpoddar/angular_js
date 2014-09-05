@@ -66,6 +66,24 @@ function hotelsController($scope) {
     }];
 
 
+    $scope.upVote = function(hotel){
+
+        if (!hotel.rating){
+            hotel.rating = 0;
+        }
+
+        hotel.rating ++;
+    }
+
+    $scope.downVote = function(hotel){
+
+        if (!hotel.rating){
+            hotel.rating = 0;
+        }
+
+        hotel.rating --;
+    }
+
     $scope.hotels = hotels;
 
     $scope.addHotel = function(hotel) {
