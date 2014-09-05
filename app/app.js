@@ -127,10 +127,24 @@ angular.module('hotel').factory('hotelsProvider',
         return {
             getHotels: function() {
                 return hotels;
+            },
+            addHotel : function(hotel){
+                hotels.push(hotel);
             }
 
         }
     });
+
+
+
+angular.module('hotel').controller('newHotelController', function($scope, hotelsProvider){
+
+     $scope.addHotel = function(hotel) {
+            hotelsProvider.addHotel(hotel);
+
+            //$scope.hotel = {};
+        }
+});
 
 angular.module('hotel').controller('hotelsController',
     function($scope, uiConfig, hotelsProvider, votingService) {
@@ -151,11 +165,7 @@ angular.module('hotel').controller('hotelsController',
 
         $scope.hotels = hotels;
 
-        $scope.addHotel = function(hotel) {
-            $scope.hotels.push(hotel);
-
-            $scope.hotel = {};
-        }
+       
 
         $scope.toFeet = function(input) {
             return input * 10.7639;
