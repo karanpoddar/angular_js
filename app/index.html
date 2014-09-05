@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app='disco'>
 
 <head>
 	<script src="angular.js"></script>
@@ -94,7 +94,7 @@
 								</h2>
 							</div>
 							<div class="col-md-4">{{hotel.location}}</div>
-							<div class="col-md-4">{{hotel.area}}</div>
+							<div class="col-md-4">{{hotel.area | toFeet | number : 2}}</div>
 						</div>
 					</div>
 				</div>
