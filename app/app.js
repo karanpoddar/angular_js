@@ -53,8 +53,36 @@ angular.module('hotel').value('uiConfig', {
     pageSize: 2
 });
 
-angular.module('hotel').factory('hotelsProvider', 
-    function(){
+angular.module('hotel').factory('votingService',
+    function() {
+
+        return {
+
+            upVote: function(hotel) {
+                if (!hotel.rating) {
+                    hotel.rating = 0;
+                }
+
+                hotel.rating++;
+            },
+            downVote: function(hotel) {
+                if (!hotel.rating) {
+                    hotel.rating = 0;
+                }
+
+            if (hotel.rating > 0) {
+                hotel.rating--;
+            }
+            }
+
+        }
+
+
+});
+
+
+angular.module('hotel').factory('hotelsProvider',
+    function() {
 
         var hotels = [{
             "id": "1",
@@ -94,18 +122,18 @@ angular.module('hotel').factory('hotelsProvider',
             "description": "Some radiant resigned however imprecise unthinkingly amongst as but criminally between far less speechlessly mowed yikes sorrowful and hence up jellyfish unreceptive off goodness seal coughed poetic outgrew jeez thus came ferret thus stridently outbid before snuffed dragonfly dispassionately gosh more indescribable kneeled nutria gurgled irrespective sorely dear pointed hardheadedly so gosh from that rode convulsive saluted packed however yikes over more went and barring away egret and partook sober komodo loaded blissfully scorpion upon jeepers stolid close square that far outside breathlessly more thus oh alas nauseatingly as overpaid more unbound wistful warthog shut shamefully seagull squid sourly.",
             "area": 198000
         }];
-    
 
-    return {
-        getHotels : function(){
-            return hotels;
+
+        return {
+            getHotels: function() {
+                return hotels;
+            }
+
         }
-
-    }
-});
+    });
 
 angular.module('hotel').controller('hotelsController',
-    function($scope, uiConfig, hotelsProvider) {
+    function($scope, uiConfig, hotelsProvider, votingService) {
 
         $scope.descLimit = uiConfig.descLimit;
 
@@ -114,21 +142,11 @@ angular.module('hotel').controller('hotelsController',
 
 
         $scope.upVote = function(hotel) {
-
-            if (!hotel.rating) {
-                hotel.rating = 0;
-            }
-
-            hotel.rating++;
+            votingService.upVote(hotel);
         }
 
         $scope.downVote = function(hotel) {
-
-            if (!hotel.rating) {
-                hotel.rating = 0;
-            }
-
-            hotel.rating--;
+            votingService.downVote(hotel);
         }
 
         $scope.hotels = hotels;
