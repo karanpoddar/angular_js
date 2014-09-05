@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html ng-app='disco'>
+<html ng-app='discoHotel'>
 
 <head>
-	<script src="angular.js"></script>
-	<script src="app.js"></script>
 	<link rel="stylesheet" type="text/css" href="components/bootstrap/css/bootstrap.css">
 	<style>
     [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
@@ -35,7 +33,7 @@
 	</div>
 	<hr/>
 	<div class="col-md-9">
-		<div class="row" ng-controller="hotelsController">
+		<div class="row" ng-controller="listingController">
 
 			<hr/>
 			<div class="row hidden-xs">
@@ -117,5 +115,15 @@
 	</div>
 
 </body>
+
+	<script src="angular.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/controllers/greetingController.js"></script>
+	<script src="js/controllers/newHotelController.js"></script>
+	<script src="js/controllers/listingController.js"></script>
+
+	<script src="js/services/hotelsProvider.js"></script>
+	<script src="js/services/votingService.js"></script>
+
 
 </html>
