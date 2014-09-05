@@ -4,7 +4,7 @@
 //new discohotel
 angular.module('disco', ['hotel'])
 
-angular.module('disco').controller('greetingController', 
+angular.module('disco').controller('greetingController',
 
     function($scope) {
         var time = (new Date()).getHours();
@@ -27,23 +27,34 @@ angular.module('disco').controller('greetingController',
 
         $scope.showGreeting = true;
 
-        $scope.toFeet = function(input){
-             return input * 10.7639;
-        }
+
     }
 );
 
-angular.module('disco').filter('toFeet', function (){
-    return function(input){
-        return input * 10.7639;
+angular.module('disco').filter('toFeet', function() {
+    return function(input, suffix) {
+        suffix = suffix ? suffix : ' ';
+
+        return String(input * 10.7639) + ' ' + suffix;
+    }
+})
+
+angular.module('disco').filter('toPounds', function() {
+    return function(input) {
+        return input / 98.58;
     }
 })
 
 
 angular.module('hotel', []);
 
-angular.module('hotel').controller('hotelsController',
-    function($scope) {
+angular.module('hotel').value('uiConfig', {
+    descLimit: 50,
+    pageSize: 2
+});
+
+angular.module('hotel').factory('hotelsProvider', 
+    function(){
 
         var hotels = [{
             "id": "1",
@@ -83,6 +94,23 @@ angular.module('hotel').controller('hotelsController',
             "description": "Some radiant resigned however imprecise unthinkingly amongst as but criminally between far less speechlessly mowed yikes sorrowful and hence up jellyfish unreceptive off goodness seal coughed poetic outgrew jeez thus came ferret thus stridently outbid before snuffed dragonfly dispassionately gosh more indescribable kneeled nutria gurgled irrespective sorely dear pointed hardheadedly so gosh from that rode convulsive saluted packed however yikes over more went and barring away egret and partook sober komodo loaded blissfully scorpion upon jeepers stolid close square that far outside breathlessly more thus oh alas nauseatingly as overpaid more unbound wistful warthog shut shamefully seagull squid sourly.",
             "area": 198000
         }];
+    
+
+    return {
+        getHotels : function(){
+            return hotels;
+        }
+
+    }
+});
+
+angular.module('hotel').controller('hotelsController',
+    function($scope, uiConfig, hotelsProvider) {
+
+        $scope.descLimit = uiConfig.descLimit;
+
+
+        var hotels = hotelsProvider.getHotels();
 
 
         $scope.upVote = function(hotel) {
@@ -111,7 +139,12 @@ angular.module('hotel').controller('hotelsController',
             $scope.hotel = {};
         }
 
+        $scope.toFeet = function(input) {
+            return input * 10.7639;
+        }
 
     });
+
+
 
 //greetingController(???)
