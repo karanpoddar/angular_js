@@ -11,8 +11,12 @@ angular.module('discoHotel', ['ngRoute'])
             templateUrl: 'partials/listing.html'
         });
       
-        $routeProvider.when('/create', {
-            template: '<h1>This is place where we will create a new hotel</h1>'
+        $routeProvider.when('/new', {
+            templateUrl: 'partials/create.html'
+        });
+       
+        $routeProvider.otherwise( {
+            redirectTo: '/listing'
         });
       
     }
