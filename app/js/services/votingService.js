@@ -1,4 +1,6 @@
+/*global angular*/
 
+'use strict';
 angular.module('discoHotel').factory('votingService',
     function() {
 
@@ -16,13 +18,12 @@ angular.module('discoHotel').factory('votingService',
                     hotel.rating = 0;
                 }
 
-            if (hotel.rating > 0) {
-                hotel.rating--;
+                if (hotel.rating > 0) {
+                    hotel.rating--;
+                }
             }
-            }
 
-        }
+        };
 
 
-});
-
+    });

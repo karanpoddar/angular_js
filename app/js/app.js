@@ -14,6 +14,10 @@ angular.module('discoHotel', ['ngRoute'])
         $routeProvider.when('/create', {
             templateUrl: 'partials/create.html'
         });
+       
+        $routeProvider.otherwise( {
+            redirectTo: '/listing'
+        });
       
     }
 ]);

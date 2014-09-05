@@ -1,8 +1,15 @@
+angular.module('discoHotel').controller('newHotelController',
 
-angular.module('discoHotel').controller('newHotelController', function($scope, hotelsProvider, $location){
+	function($scope, hotelsProvider, $location) {
 
-     $scope.addHotel = function(hotel) {
-            hotelsProvider.addHotel(hotel);
-         $location.url('listing');
-    }
-});
+		$scope.addHotel = function(form, hotel) {
+			if (form.$invalid) {
+				alert('NOT VALID');
+			} else {
+
+				hotelsProvider.addHotel(hotel);
+
+				$location.url('/listing');
+			}
+		}
+	});
