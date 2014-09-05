@@ -2,7 +2,21 @@
 'use strict';
 
 //new discohotel
-angular.module('discoHotel', [])
+angular.module('discoHotel', ['ngRoute'])
+.config(['$routeProvider',
+
+    function($routeProvider) {
+
+        $routeProvider.when('/listing', {
+            templateUrl: 'partials/listing.html'
+        });
+      
+        $routeProvider.when('/create', {
+            template: '<h1>This is place where we will create a new hotel</h1>'
+        });
+      
+    }
+]);
 
 
 angular.module('discoHotel').filter('toFeet', function() {

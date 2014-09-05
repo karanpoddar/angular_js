@@ -2,7 +2,7 @@
 <html ng-app='discoHotel'>
 
 <head>
-	<link rel="stylesheet" type="text/css" href="components/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
 	<style>
     [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   			display: none !important;
@@ -14,109 +14,65 @@
 </style>
 </head>
 
-<body  class="container">
-	<div >
-		<div class="hidden-xs" ng-controller="greetingController">
-			<div ng-show="showGreeting">
-				<h1>{{greeting.timeOfDay}} {{greeting.companyName}}!</h1>
-			</div>
-			<div>
-				<input type="text" ng-model="greeting.timeOfDay"/>
+<body  >
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">DisCo Hotel</a>
 			</div>
 
-			<div>
-				<input type="checkbox" ng-model="showGreeting"/>
-				Show Greeting
-			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="active">
+						<a href="#">Listing</a>
+					</li>
+					<li>
+						<a href="#">Create</a>
+					</li>
 
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="#">Link</a>
+					</li>
+
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
 		</div>
-	</div>
-	<hr/>
-	<div class="col-md-9">
-		<div class="row" ng-controller="listingController">
+		<!-- /.container-fluid -->
+	</nav>
 
-			<hr/>
-			<div class="row hidden-xs">
-				<div class="col-md-3">
-					<input type="text" class="form-control" ng-model="searchText" placeholder="enter search term"></div>
-
-				<div class="col-md-3">
-					<select class="form-control" ng-model="sortBy">
-						<option value="price">Price</option>
-						<option value="rating">Rating</option>
-					</select>
-
-				</div>
-
-			</div>
-			<hr/>
-			<div class="row">
-				<div ng-repeat="hotel in hotels | filter : searchText | orderBy : sortBy : true" class="row well">
-					<div class="col-md-1">
-						<div>
-							<button ng-click="upVote(hotel)" class="btn btn-sm btn-success">
-								<span class="glyphicon glyphicon-chevron-up"></span>
-							</button>
-						</div>
-						<div >
-							<h3>
-								<span class="label label-default">{{hotel.rating ? hotel.rating : 0}}</span>
-							</h3>
-						</div>
-						<div>
-							<button ng-disabled="(!hotel.rating || hotel.rating <= 0 )" ng-click="downVote(hotel)" class="btn btn-sm btn-danger">
-								<span class="glyphicon glyphicon-chevron-down"></span>
-							</button>
-						</div>
-					</div>
-					<div class="col-md-11">
-						<img ng-src="http://i.imgur.com/{{hotel.imgUrl}}" class="col-md-2 col-sm-3 col-xs-3 img-thumbnail" />
-						<div class="col-md-offset-1 col-md-9 col-sm-9 col-xs-9 padding-left">
-							<div class="row h3">{{hotel.name | uppercase}}</div>
-							<div class="row">
-								<span ng-show="!showMore">{{hotel.description | limitTo : descLimit}}</span>
-								<span ng-show="showMore">{{hotel.description}}</span>
-								<span ng-show="hotel.description.length>descLimit && !showMore">...</span>
-								<span ng-show="hotel.description.length>
-									descLimit && !showMore">
-									<a href="" ng-click="showMore = true">more</a>
-								</span>
-							</div>
-							<div class="row">
-								<div class="col-md-4 ">
-									<h2>
-										<span class="label label-success">{{hotel.price | toPounds | currency : 'GBP '}}</span>
-									</h2>
-								</div>
-								<div class="col-md-4">{{hotel.location}}</div>
-								<div class="col-md-4">{{hotel.area | toFeet : 'sqft' }}</div>
-							</div>
-						</div>
-					</div>
+	<div class="container">
+		<div >
+			<div class="hidden-xs" ng-controller="greetingController">
+				<div ng-show="showGreeting">
+					<h1>{{greeting.timeOfDay}} {{greeting.companyName}}!</h1>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="col-md-3">
-		<div ng-controller="newHotelController">
-			<div class="row hidden-xs">
-				<div class="">
-					<input type="text" ng-model="hotel.name"></div>
-				<div class="">
-					<input type="text" ng-model="hotel.price"></div>
-				<div class="">
-					<input type="text" ng-model="hotel.location"></div>
-
-				<div class="">
-					<button ng-click="addHotel(hotel)">Add</button>
-				</div>
-			</div>
+		<hr/>
+		<div>
+			<ng-view></ng-view>
 		</div>
+
 	</div>
 
 </body>
 
-	<script src="angular.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-route/angular-route.js"></script>
+
+
 	<script src="js/app.js"></script>
 	<script src="js/controllers/greetingController.js"></script>
 	<script src="js/controllers/newHotelController.js"></script>
@@ -124,6 +80,5 @@
 
 	<script src="js/services/hotelsProvider.js"></script>
 	<script src="js/services/votingService.js"></script>
-
 
 </html>
