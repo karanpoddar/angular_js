@@ -11,13 +11,19 @@ angular.module('discoHotel').factory('hotelsProvider',
 
                 var deferred = $q.defer();
 
-                $http.get('data/hotels.json').success(function(hotels){
+                $http.get('https://api.parse.com/1/classes/Hotel', {
+                    headers: {
+                        'X-Parse-Application-Id': '',
+                        'X-Parse-REST-API-Key': '',
+                    }
 
-                    $timeout(function(){
+                }).success(function(hotels) {
+
+                    $timeout(function() {
                         deferred.resolve(hotels.results);
                     }, 500);
-                    
-                }).error(function(error){
+
+                }).error(function(error) {
                     //alert(error);
 
                     deferred.reject('could not find hotels');
@@ -26,8 +32,17 @@ angular.module('discoHotel').factory('hotelsProvider',
                 return deferred.promise;
 
             },
-            addHotel : function(hotel){
+            addHotel: function(hotel) {
                 //hotels.push(hotel);
+
+                $http.post('https://api.parse.com/1/classes/Hotel', hotel, {
+                    headers: {
+                        'X-Parse-Application-Id': '',
+                        'X-Parse-REST-API-Key': '',
+                    }
+
+                });
+
             }
 
         };
