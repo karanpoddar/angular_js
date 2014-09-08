@@ -16,7 +16,10 @@
 
 		</div>
 		<hr/>
-		<div class="row">
+		<div class="row" ng-show="error">
+			<div class="lead">Something went bad - {{error}}</div>
+		</div>
+		<div class="row"  ng-hide="error">
 			<div ng-repeat="hotel in hotels | filter : searchText | orderBy : sortBy : true" class="row well">
 				<div class="col-md-1">
 					<div>

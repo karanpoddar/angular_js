@@ -5,9 +5,11 @@ angular.module('discoHotel').controller('listingController',
         $scope.descLimit = uiConfig.descLimit;
 
 
-        hotelsProvider.getHotels(function(hotels){
+        hotelsProvider.getHotels().then(function(hotels){
 
             $scope.hotels = hotels;
+        }, function(error){
+            $scope.error = error;
         });
 
 
