@@ -13,8 +13,8 @@ angular.module('discoHotel').factory('hotelsProvider',
 
                 $http.get('https://api.parse.com/1/classes/Hotel', {
                     headers: {
-                        'X-Parse-Application-Id': 'VTWSWnJAkMedzSXCQJgsEfKoIIAtnEcpnRuT4uNk',
-                        'X-Parse-REST-API-Key': 'HC3oyBVcUaHvAHs1BRJ8HeuqYtBActgToyeP5CNq',
+                        'X-Parse-Application-Id': '',
+                        'X-Parse-REST-API-Key': '',
                     }
 
                 }).success(function(hotels) {
@@ -37,8 +37,8 @@ angular.module('discoHotel').factory('hotelsProvider',
 
                 $http.post('https://api.parse.com/1/classes/Hotel', hotel, {
                     headers: {
-                        'X-Parse-Application-Id': 'VTWSWnJAkMedzSXCQJgsEfKoIIAtnEcpnRuT4uNk',
-                        'X-Parse-REST-API-Key': 'HC3oyBVcUaHvAHs1BRJ8HeuqYtBActgToyeP5CNq',
+                        'X-Parse-Application-Id': '',
+                        'X-Parse-REST-API-Key': '',
                     }
 
                 });
